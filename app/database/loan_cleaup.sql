@@ -1,0 +1,4 @@
+truncate fn_cash_advances;
+truncate fn_cash_advance_payment;
+truncate fn_cash_advances_attributes;
+truncate cash_advance_co_borrowers;

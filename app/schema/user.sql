@@ -1,0 +1,1 @@
+alter table users add column is_activated boolean default false;

@@ -1,0 +1,1 @@
+<?php  include_once(VIEWS.DS.'templates/'.'users/sidebar/loader.php');?>

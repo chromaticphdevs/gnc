@@ -1,0 +1,1 @@
+alter table product_stocks add column branchid int(10);

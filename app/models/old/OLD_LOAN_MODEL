@@ -1,0 +1,66 @@
+<?php 	
+	/*
+	*get all users with loan and payment
+	*/
+	class LoanModel extends Base_model
+	{
+
+		public function getAll()
+		{
+			$this->loan = model('FNProductReleaseModel');
+			$this->payment = model('FNProductReleasePaymentModel');
+			//get users by fn_product_release
+
+			//get get payments
+
+			$this->db->query(
+				"SELECT userid 
+					FROM fn_product_release 
+					as fn_release
+					WHERE userid != 0
+					group by userid"
+			);
+
+			$usersWithLoan = $this->db->resultSet();
+
+			$usersWithLoanId = [];
+
+			if($usersWithLoan) {
+				foreach($usersWithLoan as $row) {
+					array_push($usersWithLoanId, $row->userid);
+				}
+			}
+
+			$getUserData = [
+				"users",
+				'*',
+				" id in ('".implode("','" , $usersWithLoanId)."') "
+			];
+
+			$users = $this->dbHelper->resultSet( ...$getUserData );
+			
+			foreach($users as $key => $row) 
+			{
+				$loan = $this->loan->getTotal($row->id);
+				
+				$loanTotal =  $loan->total ?? 0;
+				$loanId = $loan->loan_id ?? 0;
+
+				$paymentTotal = $this->payment->getTotal($row->id);
+
+				$row->loan_id = $loanId;
+				$row->loan_amount = $loanTotal;
+				$row->payment_total = $paymentTotal;
+				$row->balance = $loanTotal - $paymentTotal;
+			}
+
+
+			return $users;
+		}
+
+
+		private function arrangeRetval()
+		{
+
+		}
+	}

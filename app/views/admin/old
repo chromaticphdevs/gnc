@@ -1,0 +1,171 @@
+<?php include_once VIEWS.DS.'templates/users/header.php' ;?>
+<style type="text/css">
+    #order_table
+    {
+        min-height: 400px;
+    }
+</style>
+</head>
+<body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title text-center">
+                <a href="/">
+                    <?php echo logo()?>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <!-- profile quick info -->
+<?php include_once VIEWS.DS.'templates/users/profile_bar.php' ;?>
+<!-- /menu profile quick info --> 
+<?php include_once VIEWS.DS.'templates/users/side_bar.php' ;?>
+            <br>
+            <!-- /menu footer buttons -->
+            <!-- /menu footer buttons -->
+          </div>
+        </div>      
+        <!-- top navigation -->
+        <?php include_once VIEWS.DS.'templates/users/top_nav.php' ;?>
+        <!-- /top navigation -->
+
+        <!-- page content -->       
+        <div class="right_col" role="main" style="min-height: 524px;">  
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12"><div class=" flash_message" id="message" style="display: none;"></div>   <script>
+                    setTimeout(function() {
+                        $('#message').fadeOut('slow');
+                    }, 3000);
+                </script>
+                </div>                  
+            </div>
+            <?php include_once VIEWS.DS.'templates/users/popups/top_notify.php' ;?> 
+
+            <!--OPTIONAL -->
+
+
+                <!-- 
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                        </div>
+                    </div>
+                 -->
+
+            <!-- // OPTIONAL -->
+
+            <?php if(!empty($orders)) :?>
+            <h1>
+                ORDERS
+            </h1>
+
+            <div id="order_status">
+                <div><label>Select Order Status</label></div>
+                <a href="/admin/index?orderstatus=pending">Pending</a>  | 
+                <a href="/admin/index?orderstatus=accepted">Accepted</a>
+            </div>
+            <hr>
+            <div>
+                <h4>Order Status 
+                    <span class="text-info">
+                    <?php echo $_GET['orderstatus'] ?? 'Pending'?>
+                    </span>
+                </h4>
+            </div>
+            <table class="table" id="order_table">
+                <thead>
+                    <th>Track#</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Total</th>
+                    <th>View</th>
+                </thead>
+                <tbody>
+                    <?php foreach($orders as $order) : ?>
+                    <tr>
+                        <td><?php echo $order->track_no?></td>
+                        <td><?php echo $order->fullname?></td>
+                        <td><?php echo $order->address?></td>
+                        <td><?php echo $order->total?></td>
+                        <td><a href="/orders/view_order/<?php echo $order->order_id?>" class="btn btn-primary btn-sm">Preview</a></td>
+                    </tr>
+                    <?php endforeach;?>
+                    
+                </tbody>
+            </table>
+            <?php endif;?>
+
+            <?php if(!empty($recent_transactions)) : ?>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Recent Transactions </h2>                       
+                            <div class="clearfix"></div>
+                        </div>
+                        <?php
+                            $bv_commissions = $recent_transactions['bv_commissions'];
+                            $ds_commissions = $recent_transactions['ds_commissions'];
+                        ?>
+
+                        <?php if(!empty($bv_commissions)) : ?>
+
+                            <?php foreach($bv_commissions as $com) :?>
+                                <div class="x_content">
+                                    <div class="dashboard-widget-content">
+                                        <ul class="list-unstyled timeline widget">
+                                            <li>
+                                                <div class="block">
+                                                    <div class="block_content">
+                                                        <h2 class="title">
+                                                            <div class="img_wrapper activities"><img src="/images/male-avatar2.png" class="img-circle member"></div>                                                
+                                                        </h2>
+                                                        <div class="byline">
+                                                            <span><?php echo date_long($com->dt)?></span> 
+                                                        </div>
+                                                        <p class="excerpt"> <strong class="blue">
+                                                        <?php echo $com->points?> Signup Bonus </strong> credited to your eWallet. </p>
+                                                        <p>&nbsp;</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                         </ul>
+                                    </div> <br>
+                                </div>
+                            <?php endforeach;?>
+                        <?php endif;?>
+
+                        <?php if(!empty($ds_commissions)) : ?>
+
+                            <?php foreach($ds_commissions as $com) :?>
+                                <div class="x_content">
+                                    <div class="dashboard-widget-content">
+                                        <ul class="list-unstyled timeline widget">
+                                            <li>
+                                                <div class="block">
+                                                    <div class="block_content">
+                                                        <h2 class="title">
+                                                            <div class="img_wrapper activities"><img src="/images/male-avatar2.png" class="img-circle member"></div>                                                
+                                                        </h2>
+                                                        <div class="byline">
+                                                            <span><?php echo date_long($com->dt)?></span> 
+                                                        </div>
+                                                        <p class="excerpt"> <strong class="blue">
+                                                        <?php echo $com->amount?> <?php echo $com->type?> Bonus </strong> credited to your eWallet. </p>
+                                                        <p>&nbsp;</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                         </ul>
+                                    </div> <br>
+                                </div>
+                            <?php endforeach;?>
+                        <?php endif;?>
+                    </div>
+                </div>
+            </div>
+            <?php endif;?>
+            
+        </div>
+        <!-- page content -->
+<?php include_once VIEWS.DS.'templates/users/footer.php' ;?>

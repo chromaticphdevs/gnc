@@ -1,0 +1,90 @@
+<?php   
+
+    class INStock extends Controller 
+    {
+        public function __construct()
+        {
+            $this->stock = $this->model('INStockModel');
+            $this->branch = $this->model('FNBranchModel');
+            $this->product = $this->model('INProductModel');
+        }
+
+        public function index()
+        {
+            $data = [
+                'stocks' => $this->stock->getAll(),
+                'branches' => $this->branch->get_list_asc('name'),
+                'products' => $this->product->get_list_asc('name')
+            ];
+
+            return $this->view('inventory/stock/index' , $data); 
+        }
+
+        public function stockReview()
+        {
+            /**
+             * 
+             */
+            if(!isset($_GET['stock_review']))
+            {
+                Flash::set("Invalid Request" , 'danger');
+
+                return redirect("INStock");  
+            }
+
+            $branch = $_GET['branch'];
+            $start_date = $_GET['start_date'];
+            $end_date   = $_GET['end_date'];
+
+            $data = [
+                'stock' => [
+                    'logs' => $this->stock->getLogs(" WHERE s.branch_id = '$branch' and s.date_delivered between '$start_date' and '$end_date'"),
+                    'summary' => $this->stock->getSummary(" WHERE s.branch_id = '$branch' and s.date_delivered between '$start_date' and '$end_date' ")
+                ],
+                'date' => [
+                    'start' => $start_date,
+                    'end'   => $end_date
+                ]
+            ];
+
+            return $this->view('inventory/stock/summary' , $data);
+        }
+        public function create()
+        {
+            $data = [
+                'branches' => $this->branch->get_list_asc('name'),
+                'products' => $this->product->get_list_asc('name')
+            ];
+
+            return $this->view('inventory/stock/create' , $data);
+        }
+
+        public function store()
+        {
+            $post = request()->inputs();
+
+            $result = $this->stock->store([
+                'branch_id' => $post['branch'],
+                'product_id' => $post['product'],
+                'quantity' => $post['quantity'],
+                'description' => $post['description'],
+                'date_delivered' => $post['date_delivered'],
+            ]);
+
+            Flash::set("Stock Information Saved");
+
+            if(!$result)
+                flash_err();
+
+            return redirect("INStock/show_all");
+        }
+
+        public function show_all()
+        {
+            $data = [
+                'stocks' => $this->stock->get_list_desc('s.id')
+            ];
+
+            return $this->view('inventory/stock/show_all' , $data);
+        }
+    }

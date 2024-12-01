@@ -1,0 +1,4 @@
+truncate fn_cash_inventories;
+truncate fn_code_inventories;
+truncate fn_item_inventories;
+truncate fn_single_box_loans;

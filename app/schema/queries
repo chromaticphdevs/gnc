@@ -1,0 +1,32 @@
+// $subquery = "SELECT userid , sum(ifnull(amount , 0)) as total_amount
+// 		FROM $this->table";
+//
+// $this->db->query(
+// 	"SELECT  (sum(ifnull(com.amount , 0)) - p.total_amount ) as total_payout ,
+// 	u.id as u_id , u.username as u_username ,
+// 	concat(u.firstname , ' ' , u.lastname) as u_full_name
+//
+// 	FROM commission_transactions as com
+//
+// 	LEFT JOIN $subquery as p
+// 		ON p.userid = com.userid
+// 	LEFT JOIN users as u
+// 		ON u.id = com.userid
+//
+// 	GROUP by com.userid"
+// );
+// $sql =		"SELECT  (sum(ifnull(com.amount , 0)) - p.total_amount ) as total_payout ,
+// 	u.id as u_id , u.username as u_username ,
+// 	concat(u.firstname , ' ' , u.lastname) as u_full_name
+//
+// 	FROM commission_transactions as com
+//
+// 	LEFT JOIN ($subquery) as p
+// 		ON p.userid = com.userid
+// 	LEFT JOIN users as u
+// 		ON u.id = com.userid
+//
+// 	GROUP by com.userid";
+//
+// echo $sql; die();
+// return $this->db->resultSet();

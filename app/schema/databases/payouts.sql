@@ -1,0 +1,1 @@
+alter table mg_payout_items add column cheque text

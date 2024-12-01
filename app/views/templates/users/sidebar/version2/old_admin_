@@ -1,0 +1,356 @@
+<?php
+
+    $user_type = Auth::user_position();
+    if($user_type === '2')
+    {
+        $user_type = 'users';
+    }
+    else{
+        $user_type = 'admin';
+    }
+?>
+
+<?php build('sidebar') ?>
+<ul class="nav side-menu">
+    <!-- LEVEL 1 -->
+    <li>
+        <a href="/<?php echo $user_type?>/">
+        <i class="fa fa-dashboard"></i>
+        Dashboard </a>
+    </li>
+
+    <li>
+        <a href="/CodeBatchController">
+            <i class="fa fa-circle-o"></i> Universal Codes
+        </a>
+    </li>
+     <li>
+        <a href="/timekeeping/timesheets"><i class="fa fa-list-alt" aria-hidden="true"></i>Timesheets</a>
+    </li>
+     <li><a><i class="fa fa-users" aria-hidden="true"></i> Accounts  <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <!--<li><a href="/account/list">List</a></li>
+            <li><a href="/AccountsDbbi/get_list">Breakthrough list</a></li>-->
+            <li><a href="/account/searchUser">Search</a></li>
+            <!--<li><a href="/account/deactivate_account">Account Deactivation</a></li>-->
+            <li><a href="/UserTools/user_search_tool">Search Address</a></li>
+            <!-- <li><a href="/account/create_staff">Create Staff</a></li>-->
+            <li><a href="/FNAccount/make_account">Create Staff</a></li> 
+            <li><a href="/FNAccount/approved_staff">Staff Requests</a></li>
+             <li><a href="/users/searchUser_qualification">Client Qualification</a></li>
+            
+        </ul>
+    </li>
+
+
+    <li>
+        <a><i class="fa fa-dropbox" aria-hidden="true"></i>
+            Product Released<span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+            <li><a href="/FNProductBorrower/get_product_borrower"> Qualified Product Borrower</a></li>
+            <li><a href="/FNProductBorrower/get_product_borrower_old"> Qualified Product Borrower -> Old</a></li>
+            <li>
+                <a><i class="fa fa-search" aria-hidden="true"></i>
+                   Search Client<span class="fa fa-chevron-down"></span>
+                </a>
+                <ul class="nav child_menu">
+                   <li><a href="/FNProductAdvance/"> Product Advance</a></li>
+                   <li><a href="/ProductPurchase"> Advance Payment</a></li>
+                </ul>
+            </li>
+  
+            
+           <li><a href="/FNProductBorrower/get_released_product_users/Approved"> Released Product (Client List)</a></li>
+           <li><a href="/FNProductBorrower/get_payment_list_pending"> Payment Approval  </a></li>
+           <li><a href="/FNProductBorrower/get_released_product_all"> All Released Products </a></li>
+           <li><a href="/FNProductBorrower/count_users_purchase"> Clients Total Purchases</a></li>
+
+        </ul>
+    </li>
+
+    <li>
+        <a href="/users-for-follow-up">
+            <i class="fa fa-check-square-o"  aria-hidden="true"></i>
+            Users For Follow Up
+        </a>
+    </li>
+    <li>
+        <a href="/company-customers-follow-ups/index">
+        <i class="fa fa-phone" aria-hidden="true"></i>Company Customer to FollowUp</a>
+    </li>
+
+    <li>
+        <a href="/CallCenter">
+        <i class="fa fa-phone" aria-hidden="true"></i>CSR logs</a>
+    </li>
+     <li>
+        <a href="/CSR_Reports/get_todays_report">
+        <i class="fa fa-bar-chart" aria-hidden="true"></i>CSR Reports</a>
+    </li>
+        
+    <li>
+        <a><i class="fa fa-check-square-o" aria-hidden="true"></i>
+            TOC <span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+           <li><a href="/FNUserSteps/get_position1">Step 1</a></li>
+           <?php $url = URL.'/test-of-character-passers'?>
+           <?php for($i = 2 ; $i <= 19; $i++) :?>
+                <li><a href="<?php echo $url.'/'.intval($i)?>?standby=true">Step <?php echo $i?></a></li>
+           <?php endfor?>   
+           <li><a href="/TocController/get_standby">Standby List</a></li>
+        </ul>
+        <!--<a href="/FNUserSteps/get_position1"><i class="fa fa-money" aria-hidden="true"></i>TOC Passer</a>-->
+    </li>
+
+    <li>
+        <a href="/ProductDeliveries/">
+        <i class="fa fa-dropbox"></i>Toc Deliveries </a>
+    </li>
+   
+    <li>
+        <a href="/FNCashAdvance/approval_list_all"><i class="fa fa-money" aria-hidden="true"></i>Cash Released</a>
+    </li>
+    
+    <li>
+        <a><i class="fa fa-check-square-o" aria-hidden="true"></i>
+            Expenses <span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+           <li><a href="/Expense/get_request">Proccess Requests</a></li>
+           <li><a href="/Expense/get_approved_history">Approved List</a></li>
+           <li><a href="/Expense/get_all_records">All Records</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/VideoTutorial/add_video"><i class="fa fa-video-camera" aria-hidden="true"></i>Video Tutorials</a>
+    </li>
+    <li>
+        <a href="/Legalities/create"><i class="fa fa-star" aria-hidden="true"></i>Legalities</a>
+    </li>
+     <li>
+        <a href="/WaterStation/create"><i class="fa fa-star" aria-hidden="true"></i>Water Station</a>
+    </li>
+     <li>
+        <a href="/UserTools/user_report"><i class="fa fa-star" aria-hidden="true"></i>Performers</a>
+    </li>
+    <!--<li>
+        <a href="/UserTools/get_top_performer"><i class="fa fa-star" aria-hidden="true"></i>Top Performer</a>
+    </li>-->
+
+    <li>
+        <a><i class="fa fa-check-square-o" aria-hidden="true"></i>
+            ID Verification <span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+           <li><a href="/UserIdVerification/verify_id_list">Verify ID</a></li>
+           <li><a href="/UserIdVerification/verified_list/verified">Approved ID</a></li>
+           <li><a href="/UserIdVerification/verified_list/deny">Denied ID</a></li>
+        </ul>
+    </li>
+    <!--<li>
+        <a href="/UserIdVerification/verify_id_list"><i class="fa fa-check-square-o" aria-hidden="true"></i>User's ID Verification</a>
+    </li>-->
+
+    <li>
+        <a><i class="fa fa-link" aria-hidden="true"></i>
+           Social Media Verification <span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+           <li><a href="/UserSocialMedia/verify_link_list">Verification</a></li>
+           <li><a href="/UserSocialMedia/verified_list/verified">Approved Social Media</a></li>
+           <li><a href="/UserSocialMedia/verified_list/deny">Denied Social Media</a></li>
+        </ul>
+    </li>
+  
+     <li>
+        <a href="/charts/registration_graph"><i class="fa fa-bar-chart" aria-hidden="true"></i>Charts</a>
+    </li>
+
+
+
+    <li>
+        <a><i class="fa fa-money" aria-hidden="true"></i>
+            Cashier's Cash Inventory <span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+           <li><a href="/FNCashier/get_cash_inventory_limit_by_days"> Product Release</a></li>
+           <li><a href="/FNCashier/get_cash_inventory_today"> Today's Collection</a></li>
+           <li><a href="/FNCashier/get_cash_inventory_all"> Overall Inventory</a></li>
+           <li><a href="/Charts/cash_collection_graph"> Cash Collection Graph</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a><i class="fa fa-list-alt" aria-hidden="true"></i>
+           Todays<span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu">
+           <li><a href="/UserList/get_activation_today"> Activations </a></li>
+           <li><a href="/UserList/get_registration_today">Registrations </a></li>
+           <li><a href="/UserList/get_login_today"> Logins</a></li>
+           <li><a href="/UserList/get_product_release_today">Product Released</a></li>
+
+
+        </ul>
+    </li>
+
+    <li>
+        <a href="/affiliates/dbbi_refferal_link"><i class="fa fa-magnet" aria-hidden="true"></i>Referral Link</a>
+    </li>
+    <li class="">
+        <a>
+            <i class="fa fa-sitemap" aria-hidden="true"></i>Organizations<span class="fa fa-chevron-down"></span>
+        </a>
+        <ul class="nav child_menu" style="display: none;">
+            <li class="current-page"><a href="<?php _urlCall('geneology-binary')?>">Team</a></li>
+            <li class="current-page"><a href="<?php _urlCall('geneology-binary' , ['level' => 5])?>">5th</a></li>
+            <li class="current-page"><a href="/binaryGeneology/index">7th</a></li>
+            <li><a href="<?php _urlCall('customers')?>">Customers</a></li>
+            <li><a href="<?php _urlCall('geneology-unilevel')?> ">Regular Customers</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="<?php _urlCall('transactions')?>"><i class="fa fa-line-chart" aria-hidden="true"></i>
+        Team Transactions</a>
+    </li>
+    <li>
+        <a href="/commissions/getAll"><i class="fa fa-money" aria-hidden="true"></i>Commissions</a>
+    </li>
+    <!--<li><a><i class="fa fa-balance-scale" aria-hidden="true"></i> Payout<span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu" style="display: none;">
+            <li class="current-page"><a href="/MGPayout/create_payout">Generate</a></li>
+            <li class="current-page"><a href="/MGPayout/create_payout_valid_id/?amount=0">Generate W/ Valid ID</a></li>
+            <li class="current-page"><a href="/MGPayout/create_payout_valid_id/?amount=1000">Generate W/ Valid ID Min 1000</a></li>
+            <li class="current-page"><a href="/MGPayout/create_payout_valid_id/?amount=1500">Generate W/ Valid ID Min 1500</a></li>
+            <li class="current-page"><a href="/MGPayout/list">List</a></li>
+
+        </ul>
+    </li>-->
+     <li><a><i class="fa fa-balance-scale" aria-hidden="true"></i> Payout No Cutoff<span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu" style="display: none;">
+            <li class="current-page"><a href="/MGPayout2/create_payout">Generate</a></li>
+            <li class="current-page"><a href="/MGPayout2/create_payout_valid_id/?amount=0">Generate W/ Valid ID</a></li>
+            <li class="current-page"><a href="/MGPayout2/create_payout_valid_id/?amount=1000">Generate W/ Valid ID Min 1000</a></li>
+            <li class="current-page"><a href="/MGPayout2/create_payout_valid_id/?amount=1500">Generate W/ Valid ID Min 1500</a></li>
+            <li class="current-page"><a href="/MGPayout_Request/create_payout">Requested Payout</a></li>
+            <li class="current-page"><a href="/PayoutRequest">Payout Requests</a></li>
+            <li class="current-page"><a href="/MGPayout2/list">Payout History</a></li>
+
+        </ul>
+    </li>
+    <li>
+        <a href="/MGPayout2/get_payins_with_option"><i class="fa fa-money"></i> All Payins</a>
+    </li>
+    <li>
+        <a href="/Sne/get_toppers"><i class="fa fa-bolt"></i> Break-Through </a>
+    </li>
+   
+    <!-- // LEVEL 1 -->
+
+    <!-- UTILITIES -->
+    <li><a><i class="fa fa-user"></i> Utilities  <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <li>
+                <a href="/Activation/create_code"><!-- <i class="fa fa-folder-open" aria-hidden="true"></i>-->Activation Codes</a>
+            </li>
+
+            <li class="current-page">
+                <a href="/FacebookStream/index"> <!-- <i class="fa fa-camera"></i> -->Live </a>
+            </li>
+
+            <li>
+                <a href="/RFID_Register"><!-- <i class="fa fa-key" aria-hidden="true"></i> -->
+                RFID</a>
+            </li>
+
+            <li class=""><a><i class="fa fa-angle-double-down" aria-hidden="true"></i> Downline Levels
+                <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none;">
+
+                    <li class="current-page" ><a href="/FNDownlineLevel/list_all_second_lvl">Second Level List</a></li>
+                    <li class="current-page" ><a href="/FNDownlineLevel/list_all_third_lvl">Third Level List</a></li>
+                    <li class="current-page" ><a href="/FNDownlineLevel/list_all_fourth_lvl">Fourth Level List</a></li>
+                    <li class="current-page" ><a href="/FNDownlineLevel/list_all_fifth_lvl">Fifth Level List</a></li>
+
+                </ul>
+            </li>
+
+
+
+            <li class=""><a><i class="fa fa-angle-double-down" aria-hidden="true"></i> Downline Levels All
+                <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none;">
+
+                    <li class="current-page" ><a href="/FNDownlineLevelAll/list_all_second_lvl">Second Level List</a></li>
+                    <li class="current-page" ><a href="/FNDownlineLevelAll/list_all_third_lvl">Third Level List</a></li>
+                    <li class="current-page" ><a href="/FNDownlineLevelAll/list_all_fourth_lvl">Fourth Level List</a></li>
+                    <li class="current-page" ><a href="/FNDownlineLevelAll/list_all_fifth_lvl">Fifth Level List</a></li>
+
+                </ul>
+            </li>
+
+            <li class=""><a><i class="fa fa-angle-double-down" aria-hidden="true"></i> Logs
+                <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none;">
+                    <li class="current-page"><a href="/FNCashAdvance/register_just_now">Register Just Now</a></li>
+                    <li class="current-page"><a href="/UserLogger/get_user_login"> Users logged</a></li>
+                    <li class="current-page"><a href="/charts/registration_line_graph">Daily Enties Graph</a></li>
+                </ul>
+            </li>
+
+
+            <li class=""><a><i class="fa fa-angle-double-down" aria-hidden="true"></i> Tools
+                <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none;">
+                    <li class="current-page"><a href="/RandomUserPicker">Random User</a></li>
+                    <li class="current-page"><a href="/UserRegisterAttempt">Registration Attempts</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <!-- // UTILITIES -->
+
+
+    <!-- FINANCE -->
+
+    <li class=""><a><i class="fa fa-university" aria-hidden="true"></i> Finance
+        <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu" style="display: none;">
+            <li class=""><a><i class="fa fa-angle-double-down" aria-hidden="true"></i> Cash Assistance
+                <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none;">
+                    <!--<li><a href="/FNCashAdvanceAdmin/">Search</a></li>-->
+                    <li><a href="/FNCashAdvance/request_list_all">Requests</a></li>
+                    <li><a href="/FNCashAdvance/approval_list_all">Approvals</a></li>
+                </ul>
+            </li>
+            <li class=""><a><i class="fa fa-angle-double-down" aria-hidden="true"></i> Product Assistance
+                <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu" style="display: none;">
+                    <li><a href="/FNSinglebox/make_assistance">Request</a></li>
+                    <li><a href="/FNCashAdvance/qualification_list_all">Qualificationst</a></li>
+                </ul>
+            </li>
+            <li class="current-page"><a href="/FNIndex/index">Portal</a></li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="/Inventory"><i class="fa fa-dropbox"></i>
+            Inventory
+        </a>
+    </li>
+
+    <!--<li>
+        <a href="/AutoLoan/get_product_borrower"><i class="fa fa-star"></i>
+            Generate Auto Loan 
+        </a>
+    </li>-->
+
+    <!-- // FINANCE -->
+</ul>
+<?php endbuild()?>
+
+<?php occupy('templates.users.sidebar.version2.template')?>
