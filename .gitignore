@@ -1,4 +1,4 @@
 public/
 # app/config/
-# app/libraries/
-# app/schema/
+app/libraries/
+app/schema/
